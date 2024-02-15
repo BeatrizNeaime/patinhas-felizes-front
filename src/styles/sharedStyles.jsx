@@ -64,15 +64,13 @@ const Overlay = styled.div`
   z-index: 99999;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  background: rgba(101, 101, 101, 0.85);
   top: 0;
   left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
-
-
 
 const PageHeader = styled.div`
   display: flex;
@@ -91,6 +89,16 @@ const Subtitle = styled.p`
   color: #aaaaaa;
   text-align: center;
 `;
+
+const Text = styled.p`
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  margin: 0;
+  padding: 0;
+  color: black;
+  text-align: ${(props) => (props.align ? props.align : "left")};
+`
 
 const Divider = styled.div`
   width: 90%;
@@ -116,6 +124,14 @@ const ButtonSmall = styled.button`
   }
 `;
 
+const Button = styled(ButtonSmall)`
+  height: 40px;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
 export {
   Page,
   Content,
@@ -127,5 +143,7 @@ export {
   Subtitle,
   Divider,
   ButtonSmall,
-  Form
+  Form,
+  Text,
+  Button,
 };

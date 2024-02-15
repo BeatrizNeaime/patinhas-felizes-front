@@ -10,9 +10,11 @@ const StyledInput = styled.input`
   box-sizing: border-box;
   transition: all 0.5s ease;
   position: relative;
+  outline: none;
 
   &:focus {
     border: 1px solid ${colors.green};
+    outline: ${colors.lightGreen} auto 5px;
   }
 
   &:disabled{
@@ -62,14 +64,42 @@ const StyledSelect = styled.select`
     border: 1px solid ${colors.green};
   }
 `;
+
 const StyledTextArea = styled.textarea`
   width: 100%;
-  height: 40px;
   padding: 8px;
   border: 1px solid ${colors.primary};
   border-radius: 4px;
-
 `;
+
+const StyledCheckbox = styled.input`
+  appearance: none;
+
+  border-radius: 3px;
+  border: 1px solid ${colors.primary};
+  height: 14px;
+  width: 14px;
+
+  &:hover{
+    cursor: pointer;
+    border-color: ${colors.green};
+  }
+
+  &::before{
+    content: '';
+    display: block;
+    height: 100%;
+    width: 100%;
+    background-color: ${colors.primary};
+    transition: all 100ms ease;
+    transform: scale(0);
+  }
+
+  &:checked::before{
+    transform: scale(1);
+  }
+
+`
 
 export {
   StyledInput,
@@ -78,4 +108,5 @@ export {
   StyledLabelWrapper,
   StyledSelect,
   StyledTextArea,
+  StyledCheckbox,
 };

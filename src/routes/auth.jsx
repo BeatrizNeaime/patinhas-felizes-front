@@ -1,21 +1,21 @@
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { labelsRoutes } from "./labels.routes";
+import {authLabels} from './auth.routes'
 import { CookiesUtils } from "../utils/cookies.utils";
 
-const Rotas = () => {
+const AuthRoutes = () => {
   const logged = CookiesUtils.get("logged")
   const navigate = useNavigate();
   return (
     <Routes>
-      {labelsRoutes.map((route, index) => {
+      {authLabels.map((route, index) => {
         if(logged){
-          return <Route key={index} path={route.path} element={route.element} />;
+          navigate("/");
         } else {
-          navigate("/login");
+          return <Route key={index} path={route.path} element={route.element} />;
         }
       })}
     </Routes>
-  );
-};
+  )
+}
 
-export default Rotas;
+export default AuthRoutes

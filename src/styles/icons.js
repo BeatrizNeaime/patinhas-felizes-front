@@ -1,4 +1,4 @@
-import { faArrowLeft, faCat, faCrow, faDog, faHandHoldingHeart, faHouse, faPaw, faPen, faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faCat, faCrow, faDog, faEye, faEyeSlash, faHandHoldingHeart, faHouse, faPaw, faPen, faPeopleGroup, faPlus, faUser, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 export const icons = {
     home: faHouse,
@@ -10,5 +10,9 @@ export const icons = {
     donation: faHandHoldingHeart,
     add: faPlus,
     edit: faPen,
-    close: faXmark
+    close: faXmark,
+    people: faPeopleGroup,
+    user: faUser,
+    eye: faEye,
+    eye_slash: faEyeSlash
 }

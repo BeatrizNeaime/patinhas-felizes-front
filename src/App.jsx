@@ -6,12 +6,14 @@ import store from "./store/store";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AuthRoutes from "./routes/auth";
 
 function App() {
   return (
     <>
       <Router>
         <Provider store={store}>
+          <AuthRoutes/>
           <Layout>
             <GlobalStyle />
             <Rotas />

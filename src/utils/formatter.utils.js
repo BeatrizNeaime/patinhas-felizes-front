@@ -1,9 +1,10 @@
 export const formatter = {
-    money: (v) => {
-        v = v.replace(/\D/g, "")
-        v = v.replace(/(\d)(\d{2})$/, "$1,$2")
-        v = v.replace(/(?=(\d{3})+(\D))\B/g, ".");
-
-        return v;
-    }
+   cpf: (value) => {
+      return value
+         .replace(/\D/g, '')
+         .replace(/(\d{3})(\d)/, '$1.$2')
+         .replace(/(\d{3})(\d)/, '$1.$2')
+         .replace(/(\d{3})(\d{1,2})/, '$1-$2')
+         .replace(/(-\d{2})\d+?$/, '$1')
+   }
 }

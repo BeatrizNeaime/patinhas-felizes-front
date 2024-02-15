@@ -9,7 +9,6 @@ import DonationsModal from "../components/add-donation";
 import { closeLoading, openLoading } from "../reducers/loading";
 import { DonationsServices } from "../services/donations.services";
 import Table from "../components/table";
-import { formatter } from "../utils/formatter.utils";
 
 const columns = [
   {
@@ -18,7 +17,11 @@ const columns = [
   },
   {
     label: "Valor",
-    renderCell: (item) => formatter.money(item.value),
+    renderCell: (item) =>
+      parseFloat(item.amount).toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      }),
   },
   {
     label: "Data",

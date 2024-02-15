@@ -6,14 +6,13 @@ import {
   StyledLabelWrapper
 } from "./components/style";
 
-const Input = React.forwardRef(({ label, errname, error, ...props }, ref) => {
+const Input = React.forwardRef(({ label, ...props }, ref) => {
   return (
     <FormRow>
       <StyledLabelWrapper>
         <StyledLabel>{label}</StyledLabel>
       </StyledLabelWrapper>
       <StyledInput {...props} ref={ref} />
-     
     </FormRow>
   );
 });

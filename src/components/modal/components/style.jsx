@@ -5,7 +5,7 @@ const ModalCard = styled.div`
   width: ${(props) => (props.width ? props.width : "50vw")};
   height: ${(props) => (props.height ? props.height : "auto")};
   background-color: white;
-  border-radius: 10px;
+  border-radius: 1.5rem;
   padding: 20px;
   box-sizing: border-box;
   z-index: 99999999999;

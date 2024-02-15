@@ -25,9 +25,12 @@ const Sidebar = () => {
         {labelsRoutes.map((route, index) => {
           if (route.show) {
             return (
-              <Link to={route.path} style={{ textDecoration: "none" }}>
+              <Link
+                to={route.path}
+                style={{ textDecoration: "none" }}
+                key={index}
+              >
                 <SidebarLinkContainer
-                  key={index}
                   active={route.label === cp ? true : false}
                 >
                   <FontAwesomeIcon icon={route.icon} />

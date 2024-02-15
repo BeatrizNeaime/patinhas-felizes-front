@@ -1,4 +1,4 @@
-import Dashboard from "../views/dashboard";
+import Dashboard from "../views/dashboard/dashboard";
 import Animals from "../views/animals";
 import { icons } from "../styles/icons";
 import Donations from "../views/donations";
@@ -32,6 +32,5 @@ export const labelsRoutes = [
         show: false,
         label: "Novo Animal",
         icon: icons.add
-    }
-    
+    },    
 ]

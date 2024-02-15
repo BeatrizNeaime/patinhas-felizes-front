@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { changePage } from "../../reducers/currentPage";
 import { ButtonSmall, Row } from "../../styles/sharedStyles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -22,7 +22,9 @@ const columns = [
   },
   {
     label: "Espécie",
-    renderCell: (item) => <FontAwesomeIcon icon={speciesIcons[item.species]} size={"2x"} />,
+    renderCell: (item) => (
+      <FontAwesomeIcon icon={speciesIcons[item.species]} size={"2x"} />
+    ),
   },
   {
     label: "Tamanho",
@@ -35,13 +37,16 @@ const columns = [
   {
     label: "Ações",
     renderCell: (item) => (
-      <Link to={`/animais/${item.animal_id}`} style={{ textDecoration: "none" }}>
+      <Link
+        to={`/animais/${item.animal_id}`}
+        style={{ textDecoration: "none" }}
+      >
         <ButtonSmall>
           <FontAwesomeIcon icon={icons.edit} />
         </ButtonSmall>
       </Link>
     ),
-  }
+  },
 ];
 
 const Animals = () => {
@@ -50,11 +55,15 @@ const Animals = () => {
   const [animals, setAnimals] = useState([]);
 
   const getAnimals = async () => {
-    const a = await service.getAnimals();
-    if (a) {
-      console.log(a);
-      setAnimals(a);
-      dispatch(closeLoading());
+    try {
+      const a = await service.getAnimals();
+      if (a) {
+        console.log(a);
+        setAnimals(a);
+        dispatch(closeLoading());
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 

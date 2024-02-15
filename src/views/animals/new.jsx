@@ -1,17 +1,24 @@
 import { useDispatch } from "react-redux";
-import { Form, Row } from "../../styles/sharedStyles";
+import {
+  ButtonSmall,
+  Column,
+  Form,
+  Row,
+  Text,
+} from "../../styles/sharedStyles";
 import { useLayoutEffect, useState } from "react";
 import { changePage } from "../../reducers/currentPage";
 import Input from "../../components/forms/input";
 import { FormProvider, useForm } from "react-hook-form";
 import Header from "../../components/header";
 import Select from "../../components/forms/select";
-import TextArea from "../../components/forms/textarea";
 import { ThrowToast } from "../../services/toast.services";
 import { AnimalServices } from "../../services/animals.services";
 import { size } from "../../utils/size.obj";
 import { useNavigate } from "react-router-dom";
 import { closeLoading, openLoading } from "../../reducers/loading";
+import Checkbox from "../../components/forms/checkbox";
+import TextArea from "../../components/forms/textarea";
 
 const NewAnimal = () => {
   const dispatch = useDispatch();
@@ -23,30 +30,43 @@ const NewAnimal = () => {
   } = useForm({ mode: "all" });
   const service = new AnimalServices();
   const [species, setSpecies] = useState([]);
+  const [hp, setHp] = useState(false);
   const navigate = useNavigate();
 
   const getSpecies = async () => {
-    const a = await service.getSpecies();
-    if (a) {
-      console.log(a)
-      setSpecies(a);
-      dispatch(closeLoading())
+    try {
+      const a = await service.getSpecies();
+      if (a) {
+        console.log(a);
+        setSpecies(a);
+        dispatch(closeLoading());
+      }
+    } catch (error) {
+      console.log(error);
+      dispatch(closeLoading());
     }
   };
 
   useLayoutEffect(() => {
     dispatch(changePage("Animais"));
-    dispatch(openLoading())
+    dispatch(openLoading());
     getSpecies();
   }, []);
 
   const onSubmit = async (data) => {
-    const a = await service.createAnimal(data);
-    if (a) {
-      ThrowToast.success("Animal cadastrado com sucesso");
-      setInterval(() => {
-        navigate("/animais");
-      }, 800);
+    try {
+      const send = {
+        ...data,
+        health_problems: hp ? 1 : 0,
+      };
+      const a = await service.createAnimal(send);
+      if (a) {
+        ThrowToast.success("Animal cadastrado com sucesso");
+        navigate("/animals")
+      }
+    } catch (error) {
+      console.log(error);
+      ThrowToast.error("Erro ao cadastrar animal");
     }
   };
 
@@ -74,7 +94,7 @@ const NewAnimal = () => {
             <Input
               label="Nome"
               {...register("name", {
-                required: true
+                required: true,
               })}
             />
 
@@ -101,14 +121,35 @@ const NewAnimal = () => {
               })}
             />
           </Row>
-          <Row>
-            <TextArea
+          <Row style={{ justifyContent: "flex-start" }}>
+            <Checkbox
               label="Problemas de Saúde"
-              type="number"
               {...register("health_problems")}
+              onChange={(e) => {
+                setHp(e.target.checked);
+              }}
             />
           </Row>
-          <button type="submit">Enviar</button>
+          <Column
+            style={{
+              transition: "all 2s ease",
+              display: hp ? "flex" : "none",
+              alignItems: "flex-start",
+            }}
+          >
+            <TextArea
+              label="Descrição"
+              {...register("health_problems_description")}
+            />
+            <div style={{width: "100%"}}>
+              <Text>
+                Insira as medicações que o animal toma, separando-as por
+                vírgula.
+              </Text>
+              <TextArea label="Medicações" {...register("medicines")} />
+            </div>
+          </Column>
+          <ButtonSmall type="submit">Enviar</ButtonSmall>
         </Form>
       </FormProvider>
     </>

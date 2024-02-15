@@ -12,7 +12,7 @@ const TextArea = React.forwardRef(({ label, ...props }, ref) => {
       <StyledLabelWrapper>
         <StyledLabel>{label}</StyledLabel>
       </StyledLabelWrapper>
-      <StyledTextArea {...props} ref={ref} />
+      <StyledTextArea {...props} ref={ref} cols={"10"} />
     </FormRow>
   );
 });
